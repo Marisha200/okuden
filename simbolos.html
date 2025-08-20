@@ -147,46 +147,24 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // --- General Tab Logic ---
-        const tabs = document.querySelectorAll('.tab-btn');
-        const contents = document.querySelectorAll('.tab-content');
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const target = tab.getAttribute('data-tab');
-
-                tabs.forEach(t => {
-                    t.classList.remove('text-purple-600', 'border-purple-600');
-                    t.classList.add('text-gray-500', 'border-transparent');
-                });
-                tab.classList.add('text-purple-600', 'border-purple-600');
-                tab.classList.remove('text-gray-500', 'border-transparent');
-
-                contents.forEach(content => {
-                    if (content.id === `${target}-content`) {
-                        content.classList.remove('hidden');
-                    } else {
-                        content.classList.add('hidden');
-                    }
-                });
-            });
-        });
+        let traceCanvasController, memoryCanvasController;
 
         // --- Canvas Drawing Logic ---
         function setupCanvas(canvasId, clearBtnId, strokeColor = '#4c1d95') {
             const canvas = document.getElementById(canvasId);
             const clearBtn = document.getElementById(clearBtnId);
-            if (!canvas || !clearBtn) return;
+            if (!canvas) return null;
 
             const ctx = canvas.getContext('2d');
             let drawing = false;
 
             function resizeCanvas() {
                 const { width, height } = canvas.getBoundingClientRect();
+                if (width === 0 || height === 0) return; // Don't resize if hidden
                 canvas.width = width;
                 canvas.height = height;
                 ctx.strokeStyle = strokeColor;
-                ctx.lineWidth = 8; // Made the line a bit thicker for better visibility
+                ctx.lineWidth = 8;
                 ctx.lineCap = 'round';
                 ctx.lineJoin = 'round';
             }
@@ -225,7 +203,9 @@
             function clearCanvas() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
             }
-
+            
+            // Initial resize and listeners
+            resizeCanvas();
             window.addEventListener('resize', resizeCanvas);
             canvas.addEventListener('mousedown', startDrawing);
             canvas.addEventListener('mousemove', draw);
@@ -234,14 +214,49 @@
             canvas.addEventListener('touchstart', startDrawing);
             canvas.addEventListener('touchmove', draw);
             canvas.addEventListener('touchend', stopDrawing);
-            clearBtn.addEventListener('click', clearCanvas);
+            if (clearBtn) {
+                clearBtn.addEventListener('click', clearCanvas);
+            }
             
-            resizeCanvas();
-            return { clear: clearCanvas };
+            return { clear: clearCanvas, resize: resizeCanvas };
         }
 
-        const traceCanvasController = setupCanvas('trace-canvas', 'clear-trace-btn');
-        const memoryCanvasController = setupCanvas('memory-canvas', 'retry-memory-btn', '#000000');
+        // Initialize canvases
+        traceCanvasController = setupCanvas('trace-canvas', 'clear-trace-btn');
+        memoryCanvasController = setupCanvas('memory-canvas', 'retry-memory-btn', '#000000');
+        
+        // --- General Tab Logic ---
+        const tabs = document.querySelectorAll('.tab-btn');
+        const contents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.getAttribute('data-tab');
+
+                tabs.forEach(t => {
+                    t.classList.remove('text-purple-600', 'border-purple-600');
+                    t.classList.add('text-gray-500', 'border-transparent');
+                });
+                tab.classList.add('text-purple-600', 'border-purple-600');
+                tab.classList.remove('text-gray-500', 'border-transparent');
+
+                contents.forEach(content => {
+                    if (content.id === `${target}-content`) {
+                        content.classList.remove('hidden');
+                    } else {
+                        content.classList.add('hidden');
+                    }
+                });
+
+                // **FIX**: Resize canvas when its tab is shown
+                if (target === 'trace' && traceCanvasController) {
+                    traceCanvasController.resize();
+                } else if (target === 'memory' && memoryCanvasController) {
+                    memoryCanvasController.resize();
+                }
+            });
+        });
+
 
         // --- Memory Test Logic ---
         const startMemoryBtn = document.getElementById('start-memory-btn');
@@ -258,6 +273,8 @@
             setTimeout(() => {
                 memoryView.classList.add('hidden');
                 memoryDraw.classList.remove('hidden');
+                // Ensure canvas is correctly sized after becoming visible
+                if(memoryCanvasController) memoryCanvasController.resize();
             }, 5000); // 5 seconds
         });
         
@@ -275,11 +292,13 @@
         // --- Meditate Logic ---
         const keywords = document.querySelectorAll('#keyword-container .keyword');
         let currentKeyword = 0;
-        setInterval(() => {
-            keywords.forEach(kw => kw.classList.remove('visible'));
-            keywords[currentKeyword].classList.add('visible');
-            currentKeyword = (currentKeyword + 1) % keywords.length;
-        }, 3000);
+        if (keywords.length > 0) {
+            setInterval(() => {
+                keywords.forEach(kw => kw.classList.remove('visible'));
+                keywords[currentKeyword].classList.add('visible');
+                currentKeyword = (currentKeyword + 1) % keywords.length;
+            }, 3000);
+        }
     });
     </script>
 </body>
