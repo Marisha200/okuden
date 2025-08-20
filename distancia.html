@@ -102,7 +102,7 @@
                         <img src="seiheki.png" alt="Sei He Ki" class="interactive-symbol h-full">
                         <img src="chokurei.png" alt="Cho Ku Rei" class="interactive-symbol h-full">
                     </div>
-                    <button id="next-step-3" class="mt-4 w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 transition-colors">Activar Símbolos</p>
+                    <button id="next-step-3" class="mt-4 w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 transition-colors">Activar Símbolos</button>
                 </div>
                 <!-- Step 4: Send -->
                 <div id="step-4" class="hidden text-center">
@@ -166,20 +166,21 @@
 
         nextBtns[0].addEventListener('click', () => showStep(2));
         nextBtns[1].addEventListener('click', () => showStep(3));
+        
         nextBtns[2].addEventListener('click', (e) => {
             e.target.disabled = true;
             symbols.forEach((symbol, index) => {
                 setTimeout(() => symbol.classList.add('visible'), index * 1500); // Slower animation
             });
             setTimeout(() => {
-                showStep(4)
+                targetDisplay.textContent = targetInput.value || 'la intención'; // **FIX**: Set name here
+                showStep(4);
                 e.target.disabled = false;
             }, 4500); // Wait for all symbols to appear
         });
         
         nextBtns[3].addEventListener('click', (e) => {
             e.target.disabled = true;
-            targetDisplay.textContent = targetInput.value || 'la intención';
             for(let i = 0; i < 5; i++) {
                 setTimeout(() => {
                     const beam = document.createElement('div');
