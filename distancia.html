@@ -16,7 +16,7 @@
         .interactive-symbol {
             opacity: 0;
             transform: scale(0.5);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
         .interactive-symbol.visible {
             opacity: 1;
@@ -59,15 +59,22 @@
             </a>
         </div>
 
+        <!-- Permission Note Section -->
+        <section class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-6 rounded-lg mb-12 shadow-md">
+            <h3 class="font-bold text-xl mb-2">Una Nota Importante Sobre el Permiso</h3>
+            <p class="text-base">Antes de enviar Reiki a alguien que no te lo ha pedido, es fundamental pedir permiso. Si la persona puede dar su consentimiento, pregúntale. Si no puede (por estar inconsciente, por ejemplo), pide permiso a su Ser Superior o a su alma. Esto asegura que la energía sea recibida de la mejor manera y respeta el libre albedrío de cada ser.</p>
+        </section>
+
         <!-- Explanation Section -->
         <section class="bg-white rounded-2xl shadow-xl p-8 mb-12">
             <h2 class="text-3xl font-bold text-purple-800 mb-4">Métodos de Envío</h2>
             <p class="text-lg text-gray-600 mb-6">El envío a distancia es infinitamente creativo. La clave es tener un "foco" claro que represente al receptor. Aquí tienes las formas más comunes:</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
-                <div class="bg-purple-50 p-6 rounded-lg"><h3 class="font-bold text-xl mb-2">Con Foto</h3><p>Una foto es un vínculo energético directo con la persona.</p></div>
-                <div class="bg-purple-50 p-6 rounded-lg"><h3 class="font-bold text-xl mb-2">Con Papel</h3><p>Escribir el nombre completo y la intención en un papel.</p></div>
-                <div class="bg-purple-50 p-6 rounded-lg"><h3 class="font-bold text-xl mb-2">Con un Sustituto</h3><p>Usar un muñeco, un cojín o incluso tu propia rodilla como representante.</p></div>
-                <div class="bg-purple-50 p-6 rounded-lg"><h3 class="font-bold text-xl mb-2">Con Visualización</h3><p>Simplemente imaginar a la persona o situación frente a ti.</p></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 text-center">
+                <div class="bg-gradient-to-br from-purple-100 to-purple-200 p-6 rounded-lg shadow-sm"><h3 class="font-bold text-xl text-purple-800 mb-2">Con Foto</h3><p class="text-purple-700">Un vínculo energético directo con la persona.</p></div>
+                <div class="bg-gradient-to-br from-indigo-100 to-indigo-200 p-6 rounded-lg shadow-sm"><h3 class="font-bold text-xl text-indigo-800 mb-2">Con Papel</h3><p class="text-indigo-700">Escribir el nombre y la intención en un papel.</p></div>
+                <div class="bg-gradient-to-br from-pink-100 to-pink-200 p-6 rounded-lg shadow-sm"><h3 class="font-bold text-xl text-pink-800 mb-2">Con Sustituto</h3><p class="text-pink-700">Usar un cojín o muñeco como representante.</p></div>
+                <div class="bg-gradient-to-br from-blue-100 to-blue-200 p-6 rounded-lg shadow-sm"><h3 class="font-bold text-xl text-blue-800 mb-2">Con Visualización</h3><p class="text-blue-700">Imaginar a la persona o situación frente a ti.</p></div>
+                <div class="bg-gradient-to-br from-green-100 to-green-200 p-6 rounded-lg shadow-sm"><h3 class="font-bold text-xl text-green-800 mb-2">Tu Cuerpo como Canal</h3><p class="text-green-700">Hacerte autotratamiento con la intención de que la energía fluya hacia la otra persona.</p></div>
             </div>
         </section>
 
@@ -90,12 +97,12 @@
                 <!-- Step 3: Symbols -->
                 <div id="step-3" class="hidden text-center">
                     <p class="text-xl font-semibold text-gray-700 mb-4">Paso 3: Conecta y Visualiza los Símbolos</p>
-                    <div class="flex justify-center space-x-4 my-6">
-                        <img src="honshazeshonen.png" alt="Hon Sha Ze Sho Nen" class="interactive-symbol h-20">
-                        <img src="seiheki.png" alt="Sei He Ki" class="interactive-symbol h-20">
-                        <img src="chokurei.png" alt="Cho Ku Rei" class="interactive-symbol h-20">
+                    <div class="flex justify-center space-x-4 my-6 h-20">
+                        <img src="honshazeshonen.png" alt="Hon Sha Ze Sho Nen" class="interactive-symbol h-full">
+                        <img src="seiheki.png" alt="Sei He Ki" class="interactive-symbol h-full">
+                        <img src="chokurei.png" alt="Cho Ku Rei" class="interactive-symbol h-full">
                     </div>
-                    <button id="next-step-3" class="mt-4 w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 transition-colors">Activar Símbolos</button>
+                    <button id="next-step-3" class="mt-4 w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 transition-colors">Activar Símbolos</p>
                 </div>
                 <!-- Step 4: Send -->
                 <div id="step-4" class="hidden text-center">
@@ -153,33 +160,25 @@
         
         function showStep(stepNum) {
             steps.forEach((step, index) => {
-                if (index + 1 === stepNum) {
-                    step.classList.remove('hidden');
-                } else {
-                    step.classList.add('hidden');
-                }
+                step.classList.toggle('hidden', index + 1 !== stepNum);
             });
         }
 
         nextBtns[0].addEventListener('click', () => showStep(2));
         nextBtns[1].addEventListener('click', () => showStep(3));
-        nextBtns[2].addEventListener('click', () => {
+        nextBtns[2].addEventListener('click', (e) => {
+            e.target.disabled = true;
             symbols.forEach((symbol, index) => {
-                setTimeout(() => symbol.classList.add('visible'), index * 300);
+                setTimeout(() => symbol.classList.add('visible'), index * 1500); // Slower animation
             });
-            setTimeout(() => showStep(4), 1200);
+            setTimeout(() => {
+                showStep(4)
+                e.target.disabled = false;
+            }, 4500); // Wait for all symbols to appear
         });
-        nextBtns[3].addEventListener('click', () => showStep(5));
-
-        restartBtn.addEventListener('click', () => {
-            targetInput.value = '';
-            document.getElementById('intention').value = '';
-            symbols.forEach(symbol => symbol.classList.remove('visible'));
-            showStep(1);
-        });
-
-        // Animation logic
-        nextBtns[3].addEventListener('click', () => {
+        
+        nextBtns[3].addEventListener('click', (e) => {
+            e.target.disabled = true;
             targetDisplay.textContent = targetInput.value || 'la intención';
             for(let i = 0; i < 5; i++) {
                 setTimeout(() => {
@@ -189,7 +188,17 @@
                     setTimeout(() => beam.remove(), 2000);
                 }, i * 200);
             }
-            setTimeout(() => showStep(5), 2000);
+            setTimeout(() => {
+                showStep(5);
+                e.target.disabled = false;
+            }, 2000);
+        });
+
+        restartBtn.addEventListener('click', () => {
+            targetInput.value = '';
+            document.getElementById('intention').value = '';
+            symbols.forEach(symbol => symbol.classList.remove('visible'));
+            showStep(1);
         });
     });
     </script>
