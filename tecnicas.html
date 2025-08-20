@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Técnicas Japonesas - Reiki Nivel II</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; background-color: #f3e8ff; }
+        .main-gradient { background-image: linear-gradient(135deg, #a855f7, #6366f1); }
+        #scrollTopBtn { transition: opacity 0.3s, transform 0.3s; }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; }
+        .accordion-button.open svg { transform: rotate(180deg); }
+        .step-content { display: none; }
+        .step-content.active { display: block; animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header Section -->
+    <header class="main-gradient text-white text-center py-12 sm:py-16 shadow-lg">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">Técnicas Japonesas</h1>
+            <p class="mt-4 text-lg sm:text-xl font-light">Prácticas para purificar y potenciar tu canal</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+        <!-- Back Button -->
+        <div class="mb-12">
+            <a href="index.html" class="inline-flex items-center text-purple-700 hover:text-purple-900 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                Volver al Inicio
+            </a>
+        </div>
+
+        <!-- Self-Practice Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Prácticas para Mí (Autotratamiento)</h2>
+            <div class="space-y-6 max-w-4xl mx-auto">
+                <!-- Accordion Item 1: Hatsurei Ho -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <button class="accordion-button w-full flex justify-between items-center p-6 text-left">
+                        <div>
+                            <h3 class="text-2xl font-bold text-purple-800">Hatsurei Ho</h3>
+                            <p class="text-sm text-gray-500 italic">"Método para emanar energía espiritual"</p>
+                        </div>
+                        <svg class="w-6 h-6 text-purple-600 transition-transform duration-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    </button>
+                    <div class="accordion-content px-6 pb-6">
+                        <p class="text-gray-600 mb-6">La práctica central para purificar y fortalecer tu canal de Reiki. Sigue esta guía interactiva para realizarla paso a paso.</p>
+                        <div class="border rounded-lg p-6 bg-gray-50">
+                            <div class="interactive-practice" data-technique="hatsurei">
+                                <div class="step-content active"><h3 class="font-bold text-lg">Paso 1: Postura Básica (Kihon Shisei)</h3><p>Siéntate cómodamente con la espalda recta. Cierra los ojos y enfoca tu atención en el Tanden (3-5 cm debajo del ombligo).</p><button class="next-step mt-4 bg-purple-600 text-white font-bold py-2 px-4 rounded-lg">Siguiente</button></div>
+                                <div class="step-content"><h3 class="font-bold text-lg">Paso 2: Baño Seco (Kenyoku)</h3><p>Realiza el baño seco para purificar tu campo energético, deslizando las manos en diagonal por tu torso y luego por los brazos.</p><button class="next-step mt-4 bg-purple-600 text-white font-bold py-2 px-4 rounded-lg">Siguiente</button></div>
+                                <div class="step-content"><h3 class="font-bold text-lg">Paso 3: Conectar con Reiki</h3><p>Levanta ambas manos al cielo. Siente y visualiza cómo la energía de Reiki entra por tu coronilla y llena todo tu cuerpo.</p><button class="next-step mt-4 bg-purple-600 text-white font-bold py-2 px-4 rounded-lg">Siguiente</button></div>
+                                <div class="step-content"><h3 class="font-bold text-lg">Paso 4: Meditación Gassho</h3><p>Junta tus manos en oración frente a tu corazón. Enfócate en la respiración, sintiendo el flujo de energía desde y hacia el Tanden.</p><button class="restart-step mt-4 bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded-lg">Repetir Práctica</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Accordion Item 2: Jiko Joka Healing -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <button class="accordion-button w-full flex justify-between items-center p-6 text-left">
+                        <div>
+                            <h3 class="text-2xl font-bold text-indigo-800">Jiko Joka Healing</h3>
+                            <p class="text-sm text-gray-500 italic">"Sanación de Autopurificación"</p>
+                        </div>
+                        <svg class="w-6 h-6 text-indigo-600 transition-transform duration-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    </button>
+                    <div class="accordion-content px-6 pb-6">
+                         <p class="text-gray-600 mb-6">Una poderosa técnica de autopurificación que te conecta con las energías del Cielo y la Tierra.</p>
+                         <div class="border rounded-lg p-6 bg-gray-50">
+                            <div class="interactive-practice" data-technique="jiko">
+                                <div class="step-content active"><h3 class="font-bold text-lg">Paso 1: Enraizamiento</h3><p>Ponte de pie, con los pies al ancho de los hombros. Visualiza raíces anclándote al centro de la Tierra. Levanta las manos y conecta con Reiki.</p><button class="next-step mt-4 bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg">Siguiente</button></div>
+                                <div class="step-content"><h3 class="font-bold text-lg">Paso 2: Respiración HADO (Exhalar)</h3><p>Exhala con un sonido "Haaa..." largo mientras empujas las manos hacia abajo. Visualiza la energía densa bajando a la Tierra.</p><button class="next-step mt-4 bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg">Siguiente</button></div>
+                                <div class="step-content"><h3 class="font-bold text-lg">Paso 3: Tomar Energía (Inhalar)</h3><p>Inhala suavemente mientras levantas las manos, recogiendo la energía de la Tierra. Sobre tu cabeza, gira las palmas para recibir la energía del Cielo.</p><button class="next-step mt-4 bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg">Siguiente</button></div>
+                                <div class="step-content"><h3 class="font-bold text-lg">Paso 4: Integrar y Repetir</h3><p>Exhala de nuevo con "Haaa..." bajando las manos por delante de tu cuerpo, llevando la energía del Cielo a través de ti. Repite el ciclo.</p><button class="restart-step mt-4 bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded-lg">Repetir Práctica</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Accordion Item 3: Tanden Chiryo Ho -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <button class="accordion-button w-full flex justify-between items-center p-6 text-left">
+                        <div>
+                            <h3 class="text-2xl font-bold text-teal-800">Tanden Chiryo Ho</h3>
+                            <p class="text-sm text-gray-500 italic">"Método de sanación del Tanden"</p>
+                        </div>
+                        <svg class="w-6 h-6 text-teal-600 transition-transform duration-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    </button>
+                    <div class="accordion-content px-6 pb-6">
+                         <p class="text-gray-600 mb-6">Técnica para desintoxicar y fortalecer tu centro energético vital (Tanden).</p>
+                         <div class="border rounded-lg p-6 bg-gray-50">
+                            <div class="interactive-practice" data-technique="tanden">
+                                <div class="step-content active"><h3 class="font-bold text-lg">Paso 1: Preparación y Conexión</h3><p>Siéntate o acuéstate cómodamente. Conecta con la energía Reiki y establece tu intención de sanar y purificar tu Tanden.</p><button class="next-step mt-4 bg-teal-600 text-white font-bold py-2 px-4 rounded-lg">Siguiente</button></div>
+                                <div class="step-content"><h3 class="font-bold text-lg">Paso 2: Posición de Manos</h3><p>Coloca tus manos suavemente sobre el Tanden (dos o tres dedos por debajo del ombligo).</p><button class="next-step mt-4 bg-teal-600 text-white font-bold py-2 px-4 rounded-lg">Siguiente</button></div>
+                                <div class="step-content"><h3 class="font-bold text-lg">Paso 3: Canalización</h3><p>Permite que la energía fluya. Visualízala como una luz que llena tu centro vital. Mantén la posición por 10-15 minutos.</p><button class="next-step mt-4 bg-teal-600 text-white font-bold py-2 px-4 rounded-lg">Siguiente</button></div>
+                                <div class="step-content"><h3 class="font-bold text-lg">Paso 4: Cierre</h3><p>Al finalizar, retira suavemente las manos. Agradece la energía recibida para anclar los beneficios de la sesión.</p><button class="restart-step mt-4 bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded-lg">Repetir Práctica</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Client Practice Section -->
+        <section>
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Prácticas para Otros</h2>
+            <div class="space-y-6 max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                     <!-- Ketsueki Joka Ho -->
+                     <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                        <button class="accordion-button w-full flex justify-between items-center p-6 text-left">
+                            <div>
+                                <h3 class="text-xl font-bold text-pink-800">Ketsueki Joka Ho</h3>
+                                <p class="text-sm text-gray-500 italic">"Método de purificación de la sangre"</p>
+                            </div>
+                            <svg class="w-6 h-6 text-pink-600 transition-transform duration-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                        </button>
+                        <div class="accordion-content px-6 pb-6">
+                            <div class="border rounded-lg p-4 bg-gray-50 mt-4">
+                                <div class="interactive-practice" data-technique="ketsueki">
+                                    <div class="step-content active"><h3 class="font-bold text-base">Paso 1: Posición</h3><p class="text-sm">Con el receptor boca abajo, coloca una mano en su cuello y la otra en la parte superior de la columna.</p><button class="next-step mt-2 bg-pink-600 text-white font-bold py-1 px-3 rounded-lg text-sm">Siguiente</button></div>
+                                    <div class="step-content"><h3 class="font-bold text-base">Paso 2: Deslizamiento</h3><p class="text-sm">Desliza la mano firmemente desde el cuello hasta la base de la columna. Repite 15 veces.</p><button class="next-step mt-2 bg-pink-600 text-white font-bold py-1 px-3 rounded-lg text-sm">Siguiente</button></div>
+                                    <div class="step-content"><h3 class="font-bold text-base">Paso 3: Equilibrio</h3><p class="text-sm">Coloca una mano en el cuello y la otra en la base de la columna hasta que sientas que la energía se equilibra.</p><button class="restart-step mt-2 bg-gray-300 text-gray-700 font-bold py-1 px-3 rounded-lg text-sm">Repetir</button></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Hanshin Koketsu Ho -->
+                     <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                        <button class="accordion-button w-full flex justify-between items-center p-6 text-left">
+                            <div>
+                                <h3 class="text-xl font-bold text-green-800">Hanshin Koketsu Ho</h3>
+                                <p class="text-sm text-gray-500 italic">"Intercambio de sangre de medio cuerpo"</p>
+                            </div>
+                            <svg class="w-6 h-6 text-green-600 transition-transform duration-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                        </button>
+                        <div class="accordion-content px-6 pb-6">
+                             <div class="border rounded-lg p-4 bg-gray-50 mt-4">
+                                <div class="interactive-practice" data-technique="hanshin">
+                                    <div class="step-content active"><h3 class="font-bold text-base">Paso 1: Trazar la "X"</h3><p class="text-sm">Con una mano, traza una "X" grande sobre la espalda del paciente para activar la zona.</p><button class="next-step mt-2 bg-green-600 text-white font-bold py-1 px-3 rounded-lg text-sm">Siguiente</button></div>
+                                    <div class="step-content"><h3 class="font-bold text-base">Paso 2: Recorrer la Columna</h3><p class="text-sm">Pasa suavemente los dedos índice y medio a ambos lados de la columna, mientras respiras profundamente.</p><button class="next-step mt-2 bg-green-600 text-white font-bold py-1 px-3 rounded-lg text-sm">Siguiente</button></div>
+                                    <div class="step-content"><h3 class="font-bold text-base">Paso 3: Abrir Hacia los Lados</h3><p class="text-sm">Mueve ambas manos desde el centro de la espalda hacia los lados, bajando desde el cuello hasta la zona lumbar. Repite de 4 a 10 veces.</p><button class="restart-step mt-2 bg-gray-300 text-gray-700 font-bold py-1 px-3 rounded-lg text-sm">Repetir</button></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTopBtn" class="hidden fixed bottom-5 right-5 bg-purple-600 text-white rounded-full p-3 shadow-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 transform hover:scale-110 transition-all duration-200">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" /></svg>
+    </button>
+
+    <footer class="text-center py-8 px-4 mt-8">
+        <p class="text-gray-500">&copy; 2024 Tu Rincón Zen. Creado con amor.</p>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- Scroll to Top Button Logic ---
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        window.onscroll = () => { scrollTopBtn.classList.toggle('hidden', document.body.scrollTop < 100 && document.documentElement.scrollTop < 100); };
+        scrollTopBtn.onclick = () => { window.scrollTo({ top: 0, behavior: 'smooth' }); };
+
+        // --- Accordion Logic ---
+        document.querySelectorAll('.accordion-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                button.classList.toggle('open');
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        });
+
+        // --- Interactive Practice Logic ---
+        document.querySelectorAll('.interactive-practice').forEach(practice => {
+            let currentStep = 0;
+            const steps = practice.querySelectorAll('.step-content');
+            
+            const showStep = (index) => {
+                steps.forEach((step, i) => {
+                    step.classList.toggle('active', i === index);
+                });
+            };
+
+            practice.addEventListener('click', (e) => {
+                if (e.target.classList.contains('next-step')) {
+                    currentStep = (currentStep + 1) % steps.length;
+                    showStep(currentStep);
+                }
+                if (e.target.classList.contains('restart-step')) {
+                    currentStep = 0;
+                    showStep(currentStep);
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>
