@@ -50,7 +50,7 @@
     <!-- Header Section -->
     <header class="main-gradient text-white text-center py-12 sm:py-16 shadow-lg">
         <div class="container mx-auto px-4">
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">Símbolos</h1>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">Símbolos Sagrados</h1>
             <p class="mt-4 text-lg sm:text-xl font-light">Las Llaves de la Energía Universal</p>
         </div>
     </header>
@@ -93,7 +93,7 @@
                     <p class="text-center text-gray-600 mb-4">Usa el mouse o tu dedo para calcar el símbolo y desarrollar tu memoria muscular.</p>
                     <div class="relative w-full max-w-md mx-auto aspect-square border-2 border-dashed border-gray-300 rounded-lg">
                         <canvas id="trace-canvas" class="drawing-canvas absolute top-0 left-0 w-full h-full"></canvas>
-                        <img src="https://i.imgur.com/vH7X8Jc.png" class="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none" id="trace-guide"/>
+                        <img src="chokurei.png" alt="Guía para calcar el Cho Ku Rei" class="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none" id="trace-guide"/>
                     </div>
                     <div class="mt-4 flex justify-center space-x-4">
                         <button id="clear-trace-btn" class="bg-gray-300 text-gray-700 font-bold py-2 px-6 rounded-lg hover:bg-gray-400 transition-colors">Limpiar</button>
@@ -108,13 +108,13 @@
                     </div>
                     <div id="memory-view" class="text-center hidden">
                         <p class="text-gray-600 mb-4">¡Memoriza!</p>
-                        <img src="https://i.imgur.com/vH7X8Jc.png" class="w-full max-w-md mx-auto aspect-square"/>
+                        <img src="chokurei.png" alt="Símbolo Cho Ku Rei para memorizar" class="w-full max-w-md mx-auto aspect-square"/>
                     </div>
                      <div id="memory-draw" class="hidden">
                         <p class="text-center text-gray-600 mb-4">¡Tu turno! Dibuja el símbolo como lo recuerdes.</p>
                         <div class="relative w-full max-w-md mx-auto aspect-square border-2 border-dashed border-gray-300 rounded-lg">
                             <canvas id="memory-canvas" class="drawing-canvas absolute top-0 left-0 w-full h-full"></canvas>
-                            <img src="https://i.imgur.com/vH7X8Jc.png" id="memory-solution" class="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none hidden"/>
+                            <img src="chokurei.png" alt="Solución del trazado del Cho Ku Rei" id="memory-solution" class="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none hidden"/>
                         </div>
                         <div class="mt-4 flex justify-center space-x-4">
                             <button id="check-memory-btn" class="bg-indigo-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-indigo-700 transition-colors">Verificar</button>
@@ -127,7 +127,7 @@
                 <div id="meditate-content" class="tab-content hidden text-center">
                     <p class="text-gray-600 mb-6">Enfoca tu mirada en el símbolo. Respira profundamente y conecta con su energía.</p>
                     <div class="relative w-full max-w-md mx-auto aspect-square flex items-center justify-center">
-                         <img src="https://i.imgur.com/vH7X8Jc.png" class="pulsing-symbol w-3/4 h-3/4"/>
+                         <img src="chokurei.png" alt="Símbolo Cho Ku Rei para meditar" class="pulsing-symbol w-3/4 h-3/4"/>
                     </div>
                     <div id="keyword-container" class="mt-6 text-3xl font-bold text-purple-700 h-10">
                         <span class="keyword">Poder</span>
@@ -283,4 +283,3 @@
     </script>
 </body>
 </html>
-
