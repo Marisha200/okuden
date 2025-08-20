@@ -130,7 +130,7 @@
                     <div class="relative w-full max-w-md mx-auto aspect-square flex items-center justify-center">
                          <img src="chokurei.png" alt="Símbolo Cho Ku Rei para meditar" class="pulsing-symbol w-3/4 h-3/4"/>
                     </div>
-                    <div id="keyword-container" class="mt-6 text-3xl font-bold text-purple-700 h-10">
+                    <div id="keyword-container" class="mt-6 text-2xl md:text-3xl font-bold text-purple-700 h-10 flex items-center justify-center">
                         <span class="keyword">Poder</span>
                         <span class="keyword">Purificar</span>
                         <span class="keyword">Anclar</span>
@@ -139,6 +139,46 @@
                 </div>
             </div>
         </section>
+
+        <!-- Synoptic Chart Section -->
+        <section class="mt-12 bg-white rounded-2xl shadow-xl p-8">
+            <h3 class="text-3xl font-bold text-purple-800 mb-8 text-center">Cho Ku Rei en Resumen</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Card 1: Elemento -->
+                <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-6 text-center shadow-md hover:shadow-lg transition-shadow duration-300">
+                    <div class="flex justify-center items-center h-12 w-12 rounded-full bg-white mx-auto mb-4 shadow">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h1a2 2 0 002-2v-1a2 2 0 012-2h1.945M12 4v7m0 0l-3-3m3 3l3-3" /></svg>
+                    </div>
+                    <h4 class="font-bold text-xl text-gray-700">Elemento: Tierra</h4>
+                    <p class="text-gray-500 mt-1">Representa lo físico y la manifestación.</p>
+                </div>
+                <!-- Card 2: Polaridad -->
+                <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-6 text-center shadow-md hover:shadow-lg transition-shadow duration-300">
+                    <div class="flex justify-center items-center h-12 w-12 rounded-full bg-white mx-auto mb-4 shadow">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-purple-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clip-rule="evenodd" /></svg>
+                    </div>
+                    <h4 class="font-bold text-xl text-gray-700">Polaridad: Femenina</h4>
+                    <p class="text-gray-500 mt-1">Es energía receptiva y de anclaje.</p>
+                </div>
+                <!-- Card 3: Plano de Acción -->
+                <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-6 text-center shadow-md hover:shadow-lg transition-shadow duration-300">
+                    <div class="flex justify-center items-center h-12 w-12 rounded-full bg-white mx-auto mb-4 shadow">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+                    </div>
+                    <h4 class="font-bold text-xl text-gray-700">Plano de Acción</h4>
+                    <p class="text-gray-500 mt-1">Actúa sobre el cuerpo físico y lo material.</p>
+                </div>
+                <!-- Card 4: Verbos Clave -->
+                <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-6 text-center shadow-md hover:shadow-lg transition-shadow duration-300">
+                    <div class="flex justify-center items-center h-12 w-12 rounded-full bg-white mx-auto mb-4 shadow">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H5v-2H3v-2H1v-4a6 6 0 017.743-5.743z" /></svg>
+                    </div>
+                    <h4 class="font-bold text-xl text-gray-700">Verbos Clave</h4>
+                    <p class="text-gray-500 mt-1">Potenciar, Purificar, Anclar, Proteger.</p>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <footer class="text-center py-8 px-4 mt-8">
@@ -293,6 +333,10 @@
         const keywords = document.querySelectorAll('#keyword-container .keyword');
         let currentKeyword = 0;
         if (keywords.length > 0) {
+            // Initial keyword display
+            keywords[currentKeyword].classList.add('visible');
+            currentKeyword++;
+            
             setInterval(() => {
                 keywords.forEach(kw => kw.classList.remove('visible'));
                 keywords[currentKeyword].classList.add('visible');
