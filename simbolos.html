@@ -111,8 +111,9 @@
                         <img src="chokurei.png" alt="Símbolo Cho Ku Rei para memorizar" class="w-full max-w-md mx-auto aspect-square"/>
                     </div>
                      <div id="memory-draw" class="hidden">
-                        <p class="text-center text-gray-600 mb-4">¡Tu turno! Dibuja el símbolo como lo recuerdes.</p>
-                        <div class="relative w-full max-w-md mx-auto aspect-square border-2 border-dashed border-gray-300 rounded-lg">
+                        <p class="text-center text-gray-600 mb-2">¡Tu turno! Dibuja el símbolo como lo recuerdes.</p>
+                        <p class="text-center text-gray-500 italic mb-4">No importa si el trazo no es perfecto, lo que cuenta es tu intención.</p>
+                        <div class="relative w-full max-w-md mx-auto aspect-square border-2 border-gray-300 rounded-lg bg-white">
                             <canvas id="memory-canvas" class="drawing-canvas absolute top-0 left-0 w-full h-full"></canvas>
                             <img src="chokurei.png" alt="Solución del trazado del Cho Ku Rei" id="memory-solution" class="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none hidden"/>
                         </div>
@@ -172,7 +173,7 @@
         });
 
         // --- Canvas Drawing Logic ---
-        function setupCanvas(canvasId, clearBtnId) {
+        function setupCanvas(canvasId, clearBtnId, strokeColor = '#4c1d95') {
             const canvas = document.getElementById(canvasId);
             const clearBtn = document.getElementById(clearBtnId);
             if (!canvas || !clearBtn) return;
@@ -184,8 +185,8 @@
                 const { width, height } = canvas.getBoundingClientRect();
                 canvas.width = width;
                 canvas.height = height;
-                ctx.strokeStyle = '#4c1d95'; // Indigo-800
-                ctx.lineWidth = 6;
+                ctx.strokeStyle = strokeColor;
+                ctx.lineWidth = 8; // Made the line a bit thicker for better visibility
                 ctx.lineCap = 'round';
                 ctx.lineJoin = 'round';
             }
@@ -240,7 +241,7 @@
         }
 
         const traceCanvasController = setupCanvas('trace-canvas', 'clear-trace-btn');
-        const memoryCanvasController = setupCanvas('memory-canvas', 'retry-memory-btn');
+        const memoryCanvasController = setupCanvas('memory-canvas', 'retry-memory-btn', '#000000');
 
         // --- Memory Test Logic ---
         const startMemoryBtn = document.getElementById('start-memory-btn');
