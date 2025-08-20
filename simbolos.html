@@ -9,6 +9,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f3e8ff;
@@ -39,6 +42,9 @@
         }
         .keyword.visible {
             opacity: 1;
+        }
+        #scrollTopBtn {
+            transition: opacity 0.3s, transform 0.3s;
         }
     </style>
 </head>
@@ -118,12 +124,38 @@
 
     </main>
 
+    <!-- Scroll to Top Button -->
+    <button id="scrollTopBtn" class="hidden fixed bottom-5 right-5 bg-purple-600 text-white rounded-full p-3 shadow-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 transform hover:scale-110 transition-all duration-200">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+        </svg>
+    </button>
+
     <footer class="text-center py-8 px-4 mt-8">
         <p class="text-gray-500">&copy; 2024 Tu Rincón Zen. Creado con amor.</p>
     </footer>
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
+        // --- Scroll to Top Button Logic ---
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+        window.onscroll = () => {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                scrollTopBtn.classList.remove('hidden', 'opacity-0', 'transform', 'translate-y-2');
+                scrollTopBtn.classList.add('opacity-100', 'transform', 'translate-y-0');
+            } else {
+                scrollTopBtn.classList.add('opacity-0', 'transform', 'translate-y-2');
+                setTimeout(() => {
+                    scrollTopBtn.classList.add('hidden');
+                }, 300);
+            }
+        };
+
+        scrollTopBtn.onclick = () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
         // --- Canvas Setup ---
         const canvasControllers = {
             ckr: {
