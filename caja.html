@@ -74,6 +74,11 @@
             from { opacity: 0; transform: translateY(-100px) rotate(0deg); }
             to { opacity: 1; transform: translateY(0) rotate(var(--rotation)); }
         }
+        .dropped-symbol {
+            position: absolute;
+            height: 50px;
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -116,9 +121,9 @@
                         <h3 class="text-2xl font-semibold mb-2">Paso 2: Consagra tu Caja</h3>
                         <p class="text-gray-600 mb-4">Dibuja los 3 símbolos de tu puño y letra en el interior. Arrástralos a la caja para practicar.</p>
                         <div class="flex justify-center space-x-4">
-                            <img src="chokurei.png" class="symbol-draggable h-12" alt="Cho Ku Rei">
-                            <img src="seiheki.png" class="symbol-draggable h-12" alt="Sei He Ki">
-                            <img src="honshazeshonen.png" class="symbol-draggable h-12" alt="Hon Sha Ze Sho Nen">
+                            <img src="chokurei.png" class="symbol-draggable h-12" alt="Cho Ku Rei" draggable="true">
+                            <img src="seiheki.png" class="symbol-draggable h-12" alt="Sei He Ki" draggable="true">
+                            <img src="honshazeshonen.png" class="symbol-draggable h-12" alt="Hon Sha Ze Sho Nen" draggable="true">
                         </div>
                     </div>
                     <div class="box-illustration open">
@@ -205,9 +210,9 @@
             paper.className = 'intention-paper';
             paper.textContent = text;
             
-            const randomX = Math.random() * 60 + 10; // 10% to 70%
-            const randomY = Math.random() * 40 + 50; // 50% to 90%
-            const randomRot = Math.random() * 40 - 20; // -20deg to 20deg
+            const randomX = Math.random() * 60 + 10;
+            const randomY = Math.random() * 40 + 50;
+            const randomRot = Math.random() * 40 - 20;
             
             paper.style.left = `${randomX}%`;
             paper.style.top = `${randomY}%`;
@@ -226,6 +231,38 @@
                 duration: 2000,
                 easing: 'ease-in-out'
             });
+        });
+        
+        // --- Drag and Drop Logic ---
+        const draggables = document.querySelectorAll('.symbol-draggable');
+        
+        draggables.forEach(draggable => {
+            draggable.addEventListener('dragstart', (e) => {
+                e.dataTransfer.setData('text/plain', e.target.src);
+            });
+        });
+
+        boxInterior.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+
+        boxInterior.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const src = e.dataTransfer.getData('text/plain');
+            const boxRect = boxInterior.getBoundingClientRect();
+            
+            const droppedSymbol = document.createElement('img');
+            droppedSymbol.src = src;
+            droppedSymbol.className = 'dropped-symbol';
+            
+            // Calculate position relative to the box interior
+            const x = e.clientX - boxRect.left - 25; // 25 is half of symbol height (50px)
+            const y = e.clientY - boxRect.top - 25;
+
+            droppedSymbol.style.left = `${x}px`;
+            droppedSymbol.style.top = `${y}px`;
+
+            boxInterior.appendChild(droppedSymbol);
         });
 
     });
