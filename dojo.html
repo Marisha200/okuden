@@ -74,10 +74,13 @@
                         <h3 class="font-bold text-lg">Función: Conexión (Distancia)</h3>
                     </div>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md flex justify-around items-center" id="symbol-container">
-                    <img src="ckr.png" class="h-16 symbol-piece" draggable="true" data-symbol="Poder (Físico)">
-                    <img src="shk.png" class="h-16 symbol-piece" draggable="true" data-symbol="Armonía (Emocional)">
-                    <img src="hszsn.png" class="h-16 symbol-piece" draggable="true" data-symbol="Conexión (Distancia)">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-around items-center" id="symbol-container">
+                        <img src="ckr.png" class="h-16 symbol-piece" draggable="true" data-symbol="Poder (Físico)">
+                        <img src="shk.png" class="h-16 symbol-piece" draggable="true" data-symbol="Armonía (Emocional)">
+                        <img src="hszsn.png" class="h-16 symbol-piece" draggable="true" data-symbol="Conexión (Distancia)">
+                    </div>
+                    <button id="reset-drag-drop" class="mt-4 w-full bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded-lg">Reiniciar</button>
                 </div>
             </div>
         </section>
@@ -126,30 +129,49 @@
         });
 
         // --- Drag and Drop Logic ---
-        const symbols = document.querySelectorAll('.symbol-piece');
+        const symbolContainer = document.getElementById('symbol-container');
         const dropZones = document.querySelectorAll('.drop-zone');
-        symbols.forEach(symbol => {
-            symbol.addEventListener('dragstart', e => e.dataTransfer.setData('text/plain', e.dataset.symbol));
-        });
-        dropZones.forEach(zone => {
-            zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('over'); });
-            zone.addEventListener('dragleave', () => zone.classList.remove('over'));
-            zone.addEventListener('drop', e => {
-                e.preventDefault();
-                zone.classList.remove('over');
-                const droppedSymbolConcept = e.dataTransfer.getData('text/plain');
-                if (zone.dataset.concept === droppedSymbolConcept) {
-                    const symbolImg = document.querySelector(`[data-symbol="${droppedSymbolConcept}"]`);
-                    if (symbolImg) {
-                        zone.appendChild(symbolImg);
-                        zone.classList.add('border-green-500', 'bg-green-100');
+        const resetDragDropBtn = document.getElementById('reset-drag-drop');
+
+        function initializeDragDrop() {
+            document.querySelectorAll('.symbol-piece').forEach(symbol => {
+                symbol.addEventListener('dragstart', e => {
+                    e.dataTransfer.setData('text/plain', e.dataset.symbol);
+                });
+            });
+
+            dropZones.forEach(zone => {
+                zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('over'); });
+                zone.addEventListener('dragleave', () => zone.classList.remove('over'));
+                zone.addEventListener('drop', e => {
+                    e.preventDefault();
+                    zone.classList.remove('over');
+                    const droppedSymbolConcept = e.dataTransfer.getData('text/plain');
+                    if (zone.dataset.concept === droppedSymbolConcept) {
+                        const symbolImg = document.querySelector(`[data-symbol="${droppedSymbolConcept}"]`);
+                        if (symbolImg) {
+                            zone.appendChild(symbolImg);
+                            zone.classList.add('border-green-500', 'bg-green-100');
+                        }
+                    } else {
+                        zone.classList.add('border-red-500', 'bg-red-100');
+                        setTimeout(() => zone.classList.remove('border-red-500', 'bg-red-100'), 1000);
                     }
-                } else {
-                    zone.classList.add('border-red-500', 'bg-red-100');
-                    setTimeout(() => zone.classList.remove('border-red-500', 'bg-red-100'), 1000);
-                }
+                });
+            });
+        }
+        
+        resetDragDropBtn.addEventListener('click', () => {
+            dropZones.forEach(zone => {
+                zone.classList.remove('border-green-500', 'bg-green-100', 'border-red-500', 'bg-red-100');
+                // Move symbols back to original container
+                const symbolsInZone = zone.querySelectorAll('.symbol-piece');
+                symbolsInZone.forEach(symbol => symbolContainer.appendChild(symbol));
             });
         });
+
+        initializeDragDrop();
+
 
         // --- Multiple Choice Quiz Logic ---
         const quizContainer = document.getElementById('quiz-container');
@@ -186,11 +208,11 @@
         function handleAnswer(e) {
             const selectedOption = e.target;
             const answer = questions[currentQuestionIndex].answer;
-            const isCorrect = selectedOption.textContent === answer;
+            const isCorrect = selectedOption.textContent.trim() === answer;
             
             document.querySelectorAll('.quiz-option').forEach(btn => {
                 btn.disabled = true;
-                if(btn.textContent === answer) {
+                if(btn.textContent.trim() === answer) {
                     btn.classList.add('bg-green-200', 'border-green-400');
                 }
             });
