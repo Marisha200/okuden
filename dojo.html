@@ -164,7 +164,6 @@
         resetDragDropBtn.addEventListener('click', () => {
             dropZones.forEach(zone => {
                 zone.classList.remove('border-green-500', 'bg-green-100', 'border-red-500', 'bg-red-100');
-                // Move symbols back to original container
                 const symbolsInZone = zone.querySelectorAll('.symbol-piece');
                 symbolsInZone.forEach(symbol => symbolContainer.appendChild(symbol));
             });
