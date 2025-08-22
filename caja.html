@@ -72,7 +72,7 @@
 
             <div class="max-w-4xl mx-auto">
                 <div class="mb-12 text-center">
-                    <h3 class="text-2xl font-semibold mb-2">Paso 1: Elige tu Caja</h3>
+                    <h3 class="text-2xl font-semibold mb-2">Paso 1: Tu Caja</h3>
                     <p class="text-gray-600 mb-4">Puede ser de madera, cartón o lo que tengas. ¡Lo importante es que resuene contigo!</p>
                 </div>
 
@@ -86,7 +86,7 @@
                             <img src="hszsn.png" class="symbol-draggable h-12" alt="Hon Sha Ze Sho Nen" draggable="true">
                         </div>
                     </div>
-                    <div class="relative w-full max-w-xs mx-auto aspect-video rounded-lg border-4 shadow-inner p-4 bg-white border-gray-300" id="box-interior">
+                    <div class="relative w-full max-w-xs mx-auto aspect-video rounded-lg border-2 border-gray-300 shadow-inner p-4 bg-white" id="box-interior">
                         <!-- Dropped symbols and intentions go here -->
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                     <p class="text-gray-600 mb-6">Diariamente, o cada 2-3 días, cierra tu caja y envíale Reiki con tus manos para potenciar todas las intenciones que contiene.</p>
                     <div class="flex justify-center">
                         <div class="relative w-full max-w-xs mx-auto">
-                             <div class="aspect-video rounded-lg border-4 shadow-lg bg-white border-gray-300" id="closed-box">
+                             <div class="aspect-video rounded-lg border-2 border-gray-300 shadow-lg bg-white" id="closed-box">
                                 <div class="w-full h-full rounded-md bg-gradient-to-b from-white to-gray-50 flex items-center justify-center">
                                     <div class="w-16 h-1 bg-gray-300 rounded-full"></div>
                                 </div>
@@ -188,10 +188,16 @@
 
         boxInterior.addEventListener('dragover', (e) => {
             e.preventDefault();
+            boxInterior.classList.add('bg-purple-50');
+        });
+        
+        boxInterior.addEventListener('dragleave', (e) => {
+            boxInterior.classList.remove('bg-purple-50');
         });
 
         boxInterior.addEventListener('drop', (e) => {
             e.preventDefault();
+            boxInterior.classList.remove('bg-purple-50');
             const src = e.dataTransfer.getData('text/plain');
             const boxRect = boxInterior.getBoundingClientRect();
             
