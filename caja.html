@@ -13,41 +13,6 @@
         body { font-family: 'Poppins', sans-serif; background-color: #f3e8ff; }
         .main-gradient { background-image: linear-gradient(135deg, #a855f7, #6366f1); }
         #scrollTopBtn { transition: opacity 0.3s, transform 0.3s; }
-        .box-illustration {
-            position: relative;
-            width: 300px;
-            height: 250px;
-            margin: auto;
-            perspective: 800px;
-        }
-        .box-base {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            height: 60%;
-            background-color: #d2b48c; /* Default: wood */
-            border: 3px solid #8c6d46;
-            border-top: none;
-            border-radius: 0 0 10px 10px;
-        }
-        .box-lid {
-            position: absolute;
-            top: 17%;
-            left: 50%;
-            transform-origin: bottom center;
-            width: 102%;
-            height: 45%;
-            background-color: #d2b48c;
-            border: 3px solid #8c6d46;
-            border-radius: 10px;
-            transition: transform 0.6s ease-in-out;
-            transform: translateX(-50%); 
-        }
-        .box-illustration.open .box-lid {
-            transform: translateX(-50%) rotateX(-140deg);
-        }
         .symbol-draggable {
             cursor: grab;
             transition: transform 0.2s;
@@ -71,7 +36,7 @@
             animation: fall-in 1s ease-out forwards;
         }
         @keyframes fall-in {
-            from { opacity: 0; transform: translateY(-100px) rotate(0deg); }
+            from { opacity: 0; transform: translateY(-50px) rotate(0deg); }
             to { opacity: 1; transform: translateY(0) rotate(var(--rotation)); }
         }
         .dropped-symbol {
@@ -108,27 +73,21 @@
             <div class="max-w-4xl mx-auto">
                 <div class="mb-12 text-center">
                     <h3 class="text-2xl font-semibold mb-2">Paso 1: Elige tu Caja</h3>
-                    <p class="text-gray-600 mb-4">Puede ser de cualquier material. ¡Lo importante es que resuene contigo!</p>
-                    <div class="flex justify-center space-x-4">
-                        <button class="box-choice p-3 rounded-lg border-2 border-purple-500" data-color="#d2b48c" data-border="#8c6d46">Madera</button>
-                        <button class="box-choice p-3 rounded-lg border-2" data-color="#e0e0e0" data-border="#a0a0a0">Cartón</button>
-                        <button class="box-choice p-3 rounded-lg border-2" data-color="#c0c0c0" data-border="#808080">Metal</button>
-                    </div>
+                    <p class="text-gray-600 mb-4">Puede ser de madera, cartón o lo que tengas. ¡Lo importante es que resuene contigo!</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-12">
-                    <div class="text-center">
+                    <div class="text-center md:order-2">
                         <h3 class="text-2xl font-semibold mb-2">Paso 2: Consagra tu Caja</h3>
                         <p class="text-gray-600 mb-4">Dibuja los 3 símbolos de tu puño y letra en el interior. Arrástralos a la caja para practicar.</p>
                         <div class="flex justify-center space-x-4">
-                            <img src="chokurei.png" class="symbol-draggable h-12" alt="Cho Ku Rei" draggable="true">
-                            <img src="seiheki.png" class="symbol-draggable h-12" alt="Sei He Ki" draggable="true">
-                            <img src="honshazeshonen.png" class="symbol-draggable h-12" alt="Hon Sha Ze Sho Nen" draggable="true">
+                            <img src="ckr.png" class="symbol-draggable h-12" alt="Cho Ku Rei" draggable="true">
+                            <img src="shk.png" class="symbol-draggable h-12" alt="Sei He Ki" draggable="true">
+                            <img src="hszsn.png" class="symbol-draggable h-12" alt="Hon Sha Ze Sho Nen" draggable="true">
                         </div>
                     </div>
-                    <div class="box-illustration open">
-                        <div class="box-lid"></div>
-                        <div class="box-base" id="box-interior"></div>
+                    <div class="relative w-full max-w-xs mx-auto aspect-video rounded-lg border-4 shadow-inner p-4 bg-white border-gray-300" id="box-interior">
+                        <!-- Dropped symbols and intentions go here -->
                     </div>
                 </div>
                 
@@ -145,12 +104,13 @@
                     <h3 class="text-2xl font-semibold mb-2">Paso 4: Activa con Reiki</h3>
                     <p class="text-gray-600 mb-6">Diariamente, o cada 2-3 días, cierra tu caja y envíale Reiki con tus manos para potenciar todas las intenciones que contiene.</p>
                     <div class="flex justify-center">
-                        <div class="relative">
-                             <div class="box-illustration" id="closed-box">
-                                <div class="box-lid"></div>
-                                <div class="box-base"></div>
-                            </div>
-                            <p class="text-3xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0" id="activation-hands">🙌</p>
+                        <div class="relative w-full max-w-xs mx-auto">
+                             <div class="aspect-video rounded-lg border-4 shadow-lg bg-white border-gray-300" id="closed-box">
+                                <div class="w-full h-full rounded-md bg-gradient-to-b from-white to-gray-50 flex items-center justify-center">
+                                    <div class="w-16 h-1 bg-gray-300 rounded-full"></div>
+                                </div>
+                             </div>
+                            <p class="text-4xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0" id="activation-hands">🙌</p>
                         </div>
                     </div>
                      <button id="activate-btn" class="mt-4 bg-indigo-600 text-white font-bold py-3 px-8 rounded-lg">Activar con Reiki</button>
@@ -181,27 +141,12 @@
         scrollTopBtn.onclick = () => { window.scrollTo({ top: 0, behavior: 'smooth' }); };
 
         // --- Box Creation Logic ---
-        const boxChoices = document.querySelectorAll('.box-choice');
         const boxInterior = document.getElementById('box-interior');
         const addIntentionBtn = document.getElementById('add-intention-btn');
         const intentionInput = document.getElementById('intention-input');
         const activateBtn = document.getElementById('activate-btn');
         const activationHands = document.getElementById('activation-hands');
-        const closedBox = document.getElementById('closed-box');
-
-        boxChoices.forEach(button => {
-            button.addEventListener('click', () => {
-                const color = button.dataset.color;
-                const border = button.dataset.border;
-                document.querySelectorAll('.box-base, .box-lid').forEach(el => {
-                    el.style.backgroundColor = color;
-                    el.style.borderColor = border;
-                });
-                boxChoices.forEach(btn => btn.classList.remove('border-purple-500'));
-                button.classList.add('border-purple-500');
-            });
-        });
-
+        
         addIntentionBtn.addEventListener('click', () => {
             const text = intentionInput.value.trim();
             if (text === '') return;
@@ -211,7 +156,7 @@
             paper.textContent = text;
             
             const randomX = Math.random() * 60 + 10;
-            const randomY = Math.random() * 40 + 50;
+            const randomY = Math.random() * 40 + 20;
             const randomRot = Math.random() * 40 - 20;
             
             paper.style.left = `${randomX}%`;
@@ -223,7 +168,6 @@
         });
         
         activateBtn.addEventListener('click', () => {
-            closedBox.classList.remove('open');
             activationHands.animate([
                 { opacity: 1, transform: 'translate(-50%, -50%) scale(1.5)' },
                 { opacity: 0, transform: 'translate(-50%, -50%) scale(1)' }
@@ -255,8 +199,7 @@
             droppedSymbol.src = src;
             droppedSymbol.className = 'dropped-symbol';
             
-            // Calculate position relative to the box interior
-            const x = e.clientX - boxRect.left - 25; // 25 is half of symbol height (50px)
+            const x = e.clientX - boxRect.left - 25;
             const y = e.clientY - boxRect.top - 25;
 
             droppedSymbol.style.left = `${x}px`;
