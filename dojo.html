@@ -13,11 +13,10 @@
         body { font-family: 'Poppins', sans-serif; background-color: #f3e8ff; }
         .main-gradient { background-image: linear-gradient(135deg, #a855f7, #6366f1); }
         #scrollTopBtn { transition: opacity 0.3s, transform 0.3s; }
-        .answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; }
-        .drop-zone { border: 2px dashed #cbd5e1; transition: background-color 0.3s; }
-        .drop-zone.over { background-color: #e9d5ff; }
+        .drop-zone { border: 2px dashed #cbd5e1; transition: background-color 0.3s, border-color 0.3s; }
+        .drop-zone.over { background-color: #e9d5ff; border-color: #a855f7; }
         .symbol-piece { cursor: grab; }
-        .quiz-option { transition: background-color 0.3s; }
+        .quiz-option, .tf-option { transition: background-color 0.3s; }
     </style>
 </head>
 <body class="text-gray-800">
@@ -37,21 +36,25 @@
             </a>
         </div>
 
-        <!-- Game 1: Q&A -->
+        <!-- Game 1: True or False -->
         <section class="mb-16">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Preguntas y Respuestas</h2>
-            <div class="space-y-4 max-w-3xl mx-auto">
-                <div class="bg-white rounded-lg shadow-md">
-                    <button class="question w-full p-4 text-left font-semibold">¿Qué es un Kotodama?</button>
-                    <div class="answer px-4 pb-4 text-gray-600"><p>"El espíritu de la palabra". Son sonidos sagrados o mantras que, al ser pronunciados, resuenan con la energía universal y tienen el poder de transformar y sanar.</p></div>
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Verdadero o Falso</h2>
+            <div class="space-y-6 max-w-3xl mx-auto">
+                <!-- Question 1 -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <p class="text-lg font-semibold mb-4">"La Caja Reiki es una técnica tradicional japonesa enseñada por Mikao Usui."</p>
+                    <div class="flex space-x-4">
+                        <button class="tf-option w-full p-3 font-bold rounded-lg border" data-correct="true">Falso</button>
+                        <button class="tf-option w-full p-3 font-bold rounded-lg border" data-correct="false">Verdadero</button>
+                    </div>
                 </div>
-                <div class="bg-white rounded-lg shadow-md">
-                    <button class="question w-full p-4 text-left font-semibold">¿Cuál es el propósito principal del Hon Sha Ze Sho Nen?</button>
-                    <div class="answer px-4 pb-4 text-gray-600"><p>Trascender el tiempo y el espacio, permitiendo enviar Reiki a distancia, sanar el pasado, enviar luz al futuro y trabajar a nivel kármico.</p></div>
-                </div>
-                <div class="bg-white rounded-lg shadow-md">
-                    <button class="question w-full p-4 text-left font-semibold">¿Con qué energía resuena el Cho Ku Rei?</button>
-                    <div class="answer px-4 pb-4 text-gray-600"><p>Resuena profundamente con la energía de la Madre Tierra. Se utiliza para energizar, purificar, anclar y trabajar en el plano físico.</p></div>
+                <!-- Question 2 -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <p class="text-lg font-semibold mb-4">"Se necesita permiso para enviar Reiki a distancia a alguien que no lo ha pedido."</p>
+                    <div class="flex space-x-4">
+                        <button class="tf-option w-full p-3 font-bold rounded-lg border" data-correct="false">Falso</button>
+                        <button class="tf-option w-full p-3 font-bold rounded-lg border" data-correct="true">Verdadero</button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -60,7 +63,7 @@
         <section class="mb-16">
             <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Asocia los Símbolos</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-                <div class="space-y-4">
+                <div class="space-y-4" id="drop-container">
                     <div class="bg-white p-4 rounded-lg shadow-md drop-zone" data-concept="Poder (Físico)">
                         <h3 class="font-bold text-lg">Función: Poder (Físico)</h3>
                     </div>
@@ -71,7 +74,7 @@
                         <h3 class="font-bold text-lg">Función: Conexión (Distancia)</h3>
                     </div>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md flex justify-around items-center">
+                <div class="bg-white p-6 rounded-lg shadow-md flex justify-around items-center" id="symbol-container">
                     <img src="chokurei.png" class="h-16 symbol-piece" draggable="true" data-symbol="Poder (Físico)">
                     <img src="seiheki.png" class="h-16 symbol-piece" draggable="true" data-symbol="Armonía (Emocional)">
                     <img src="honshazeshonen.png" class="h-16 symbol-piece" draggable="true" data-symbol="Conexión (Distancia)">
@@ -107,15 +110,18 @@
         window.onscroll = () => { scrollTopBtn.classList.toggle('hidden', document.body.scrollTop < 100 && document.documentElement.scrollTop < 100); };
         scrollTopBtn.onclick = () => { window.scrollTo({ top: 0, behavior: 'smooth' }); };
 
-        // --- Q&A Logic ---
-        document.querySelectorAll('.question').forEach(button => {
-            button.addEventListener('click', () => {
-                const answer = button.nextElementSibling;
-                if (answer.style.maxHeight) {
-                    answer.style.maxHeight = null;
+        // --- True or False Logic ---
+        document.querySelectorAll('.tf-option').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const isCorrect = e.target.dataset.correct === 'true';
+                const parent = e.target.parentElement;
+                parent.querySelectorAll('.tf-option').forEach(btn => btn.disabled = true);
+                if (isCorrect) {
+                    e.target.classList.add('bg-green-200', 'border-green-400');
                 } else {
-                    answer.style.maxHeight = answer.scrollHeight + "px";
-                } 
+                    e.target.classList.add('bg-red-200', 'border-red-400');
+                    parent.querySelector('[data-correct="true"]').classList.add('bg-green-200', 'border-green-400');
+                }
             });
         });
 
@@ -134,8 +140,10 @@
                 const droppedSymbolConcept = e.dataTransfer.getData('text/plain');
                 if (zone.dataset.concept === droppedSymbolConcept) {
                     const symbolImg = document.querySelector(`[data-symbol="${droppedSymbolConcept}"]`);
-                    zone.appendChild(symbolImg);
-                    zone.classList.add('border-green-500', 'bg-green-100');
+                    if (symbolImg) {
+                        zone.appendChild(symbolImg);
+                        zone.classList.add('border-green-500', 'bg-green-100');
+                    }
                 } else {
                     zone.classList.add('border-red-500', 'bg-red-100');
                     setTimeout(() => zone.classList.remove('border-red-500', 'bg-red-100'), 1000);
@@ -177,18 +185,26 @@
 
         function handleAnswer(e) {
             const selectedOption = e.target;
-            const isCorrect = selectedOption.textContent === questions[currentQuestionIndex].answer;
+            const answer = questions[currentQuestionIndex].answer;
+            const isCorrect = selectedOption.textContent === answer;
+            
+            document.querySelectorAll('.quiz-option').forEach(btn => {
+                btn.disabled = true;
+                if(btn.textContent === answer) {
+                    btn.classList.add('bg-green-200', 'border-green-400');
+                }
+            });
+
             if (isCorrect) {
                 score++;
-                selectedOption.classList.add('bg-green-200', 'border-green-400');
             } else {
                 selectedOption.classList.add('bg-red-200', 'border-red-400');
             }
-            document.querySelectorAll('.quiz-option').forEach(btn => btn.disabled = true);
+
             setTimeout(() => {
                 currentQuestionIndex++;
                 loadQuestion();
-            }, 1200);
+            }, 1500);
         }
 
         function showResult() {
