@@ -303,11 +303,27 @@
             } else {
                 selectedOption.classList.add('bg-red-200', 'border-red-400');
             }
+            
+            // Countdown message
+            const countdownElement = document.createElement('p');
+            countdownElement.classList.add('text-center', 'mt-4', 'text-gray-500', 'italic');
+            quizContainer.appendChild(countdownElement);
+            
+            let countdown = 3;
+            countdownElement.textContent = `Siguiente pregunta en ${countdown}...`;
+            const intervalId = setInterval(() => {
+                countdown--;
+                if (countdown > 0) {
+                    countdownElement.textContent = `Siguiente pregunta en ${countdown}...`;
+                } else {
+                    clearInterval(intervalId);
+                }
+            }, 1000);
 
             setTimeout(() => {
                 currentQuestionIndex++;
                 loadQuestion();
-            }, 1500);
+            }, 3000);
         }
 
         function showResult() {
