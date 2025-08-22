@@ -26,13 +26,14 @@
             position: absolute;
             background-color: #fffacd;
             border: 1px solid #eee;
-            padding: 2px 4px;
-            font-size: 10px;
+            padding: 5px 8px;
+            font-size: 14px;
             border-radius: 2px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-width: 80px;
+            max-width: 120px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
             animation: fall-in 1s ease-out forwards;
         }
         @keyframes fall-in {
@@ -81,9 +82,9 @@
                         <h3 class="text-2xl font-semibold mb-2">Paso 2: Consagra tu Caja</h3>
                         <p class="text-gray-600 mb-4">Dibuja los 3 símbolos de tu puño y letra en el interior. Arrástralos a la caja para practicar.</p>
                         <div class="flex justify-center space-x-4">
-                            <img src="ckr.png" class="symbol-draggable h-12" alt="Cho Ku Rei" draggable="true">
-                            <img src="shk.png" class="symbol-draggable h-12" alt="Sei He Ki" draggable="true">
-                            <img src="hszsn.png" class="symbol-draggable h-12" alt="Hon Sha Ze Sho Nen" draggable="true">
+                            <img src="ckr.png" id="ckr-drag" class="symbol-draggable h-12" alt="Cho Ku Rei" draggable="true">
+                            <img src="shk.png" id="shk-drag" class="symbol-draggable h-12" alt="Sei He Ki" draggable="true">
+                            <img src="hszsn.png" id="hszsn-drag" class="symbol-draggable h-12" alt="Hon Sha Ze Sho Nen" draggable="true">
                         </div>
                     </div>
                     <div class="relative w-full max-w-xs mx-auto aspect-video rounded-lg border-2 border-gray-300 shadow-inner p-4 bg-white" id="box-interior">
@@ -183,6 +184,7 @@
         draggables.forEach(draggable => {
             draggable.addEventListener('dragstart', (e) => {
                 e.dataTransfer.setData('text/plain', e.target.src);
+                e.dataTransfer.setData('text/id', e.target.id);
             });
         });
 
@@ -199,11 +201,20 @@
             e.preventDefault();
             boxInterior.classList.remove('bg-purple-50');
             const src = e.dataTransfer.getData('text/plain');
+            const id = e.dataTransfer.getData('text/id');
+
+            // Check if symbol already exists
+            const existingSymbol = boxInterior.querySelector(`[data-symbol-id="${id}"]`);
+            if (existingSymbol) {
+                return; // Do nothing if it's already there
+            }
+
             const boxRect = boxInterior.getBoundingClientRect();
             
             const droppedSymbol = document.createElement('img');
             droppedSymbol.src = src;
             droppedSymbol.className = 'dropped-symbol';
+            droppedSymbol.dataset.symbolId = id; // Add data-id to check for duplicates
             
             const x = e.clientX - boxRect.left - 25;
             const y = e.clientY - boxRect.top - 25;
