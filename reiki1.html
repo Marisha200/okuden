@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>El Camino del Reikista</title>
+  <style>
+    /* === FUENTES Y VARIABLES === */
+    :root {
+      --primary: #3c5c4c;
+      --secondary: #8a9b6c;
+      --text: #2e2e2e;
+      --bg: #f9f7f2;
+      --paper: #fdfcfa;
+      --accent: #d46b5f;
+      --border: #d9d2c4;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Playfair+Display:wght@400;700&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Noto Serif JP', serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      background-image: url('https://images.unsplash.com/photo-1534367566456-4c8182a07fa2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-attachment: fixed;
+      background-blend-mode: overlay;
+      background-color: rgba(249, 247, 242, 0.92);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      background: rgba(253, 252, 250, 0.85);
+      border-radius: 16px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary);
+      font-size: 2.5rem;
+      margin: 0;
+    }
+
+    h2 {
+      color: var(--primary);
+      border-left: 5px solid var(--accent);
+      padding-left: 15px;
+      margin: 30px 0 15px;
+    }
+
+    p {
+      margin: 12px 0;
+    }
+
+    .stage {
+      background: var(--paper);
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      border: 1px solid var(--border);
+    }
+
+    .days {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+      margin: 15px 0;
+    }
+
+    .day {
+      border: 1px solid var(--border);
+      padding: 10px;
+      text-align: center;
+      border-radius: 8px;
+      background: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .day.completed {
+      background: var(--secondary);
+      color: white;
+      font-weight: bold;
+    }
+
+    .diary {
+      width: 100%;
+      min-height: 100px;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      font-family: 'Noto Serif JP', serif;
+      background: #fff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: var(--primary);
+      font-size: 0.9rem;
+    }
+
+    .seal {
+      display: block;
+      width: 80px;
+      height: 80px;
+      margin: 20px auto;
+      background: url('https://img.icons8.com/color/96/000000/seal.png') no-repeat center;
+      background-size: contain;
+      opacity: 0;
+      transition: opacity 1s;
+    }
+
+    .seal.visible {
+      opacity: 0.6;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+      .container {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>🌸 El Camino del Reikista</h1>
+      <p>Un viaje de 21 días hacia tu corazón sanador</p>
+    </header>
+
+    <div id="progress-bar" style="width:100%; background:#e0dcd5; height:10px; border-radius:5px; margin:20px 0;">
+      <div id="progress" style="width:0%; height:100%; background:#8a9b6c; border-radius:5px; transition: width 0.5s;"></div>
+    </div>
+
+    <!-- ETAPA 1 -->
+    <section class="stage">
+      <h2>🚪 La Puerta del Comienzo</h2>
+      <p><strong>Día 1:</strong> Escribe tu intención con palabras o dibujo.</p>
+      <textarea class="diary" placeholder="Hoy comienzo mi camino con Reiki porque..." data-day="1"></textarea>
+      <div class="days">
+        <div class="day" onclick="toggleDay(this, 1)">Día 1</div>
+      </div>
+    </section>
+
+    <!-- ETAPA 2 -->
+    <section class="stage">
+      <h2>🌊 El Río de la Purificación</h2>
+      <p><strong>Días 2-4:</strong> Practica limpieza energética y escribe un haiku de lo que sueltas.</p>
+      <textarea class="diary" placeholder="Haiku de liberación..." data-day="2"></textarea>
+      <div class="days">
+        <div class="day" onclick="toggleDay(this, 2)">Día 2</div>
+        <div class="day" onclick="toggleDay(this, 3)">Día 3</div>
+        <div class="day" onclick="toggleDay(this, 4)">Día 4</div>
+      </div>
+    </section>
+
+    <!-- ETAPA 3 -->
+    <section class="stage">
+      <h2>🌿 El Bosque de las Manos Sanadoras</h2>
+      <p><strong>Días 5-10:</strong> Practica las posiciones. Registra sensaciones.</p>
+      <textarea class="diary" placeholder="¿Qué sintieron mis manos hoy?" data-day="5"></textarea>
+      <div class="days">
+        <div class="day" onclick="toggleDay(this, 5)">Día 5</div>
+        <div class="day" onclick="toggleDay(this, 6)">Día 6</div>
+        <div class="day" onclick="toggleDay(this, 7)">Día 7</div>
+        <div class="day" onclick="toggleDay(this, 8)">Día 8</div>
+        <div class="day" onclick="toggleDay(this, 9)">Día 9</div>
+        <div class="day" onclick="toggleDay(this, 10)">Día 10</div>
+      </div>
+    </section>
+
+    <!-- ETAPA 4 -->
+    <section class="stage">
+      <h2>🍃 El Puente de los Cinco Principios</h2>
+      <p><strong>Días 11-15:</strong> Vive un principio por día. Ilústralo.</p>
+      <textarea class="diary" placeholder="Hoy practiqué: 'Solo por hoy, no me preocuparé'..." data-day="11"></textarea>
+      <div class="days">
+        <div class="day" onclick="toggleDay(this, 11)">Día 11</div>
+        <div class="day" onclick="toggleDay(this, 12)">Día 12</div>
+        <div class="day" onclick="toggleDay(this, 13)">Día 13</div>
+        <div class="day" onclick="toggleDay(this, 14)">Día 14</div>
+        <div class="day" onclick="toggleDay(this, 15)">Día 15</div>
+      </div>
+    </section>
+
+    <!-- ETAPA 5 -->
+    <section class="stage">
+      <h2>🕯️ La Lámpara de la Intención</h2>
+      <p><strong>Días 16-18:</strong> Usa el Reiki Ideo Kyō. Envía luz en silencio.</p>
+      <textarea class="diary" placeholder="Oré con el corazón hoy..." data-day="16"></textarea>
+      <div class="days">
+        <div class="day" onclick="toggleDay(this, 16)">Día 16</div>
+        <div class="day" onclick="toggleDay(this, 17)">Día 17</div>
+        <div class="day" onclick="toggleDay(this, 18)">Día 18</div>
+      </div>
+    </section>
+
+    <!-- ETAPA 6 -->
+    <section class="stage">
+      <h2>🌄 La Cima del Corazón</h2>
+      <p><strong>Días 19-21:</strong> Autotratamiento completo. Escribe una carta a tu yo futuro.</p>
+      <textarea class="diary" placeholder="Querido yo del futuro, hoy sané..." data-day="19"></textarea>
+      <div class="days">
+        <div class="day" onclick="toggleDay(this, 19)">Día 19</div>
+        <div class="day" onclick="toggleDay(this, 20)">Día 20</div>
+        <div class="day" onclick="toggleDay(this, 21)">Día 21</div>
+      </div>
+    </section>
+
+    <!-- ETAPA 7 -->
+    <section class="stage">
+      <h2>🎖️ El Pergamino del Primer Paso</h2>
+      <p>¡Felicitaciones! Has completado tu primer camino.</p>
+      <p>Descarga tu pergamino simbólico y comparte tu luz.</p>
+      <div class="seal" id="finalSeal"></div>
+      <button onclick="checkCompletion()" style="padding:10px 20px; background:var(--accent); color:white; border:none; border-radius:6px; cursor:pointer;">
+        Verificar logro
+      </button>
+    </section>
+
+    <footer>
+      <p>© 2025 Enseñado con corazón por Marina<br>
+      Inspirado en el Reiki Usui Shiki Ryoho – Tradición Japonesa</p>
+    </footer>
+  </div>
+
+  <script>
+    // Guardar estado en localStorage
+    const completedDays = JSON.parse(localStorage.getItem('reikiDays')) || [];
+
+    function toggleDay(element, day) {
+      const index = completedDays.indexOf(day);
+      if (index === -1) {
+        completedDays.push(day);
+        element.classList.add('completed');
+      } else {
+        completedDays.splice(index, 1);
+        element.classList.remove('completed');
+      }
+      localStorage.setItem('reikiDays', JSON.stringify(completedDays));
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const progress = document.getElementById('progress');
+      const percentage = (completedDays.length / 21) * 100;
+      progress.style.width = percentage + '%';
+      checkSeal();
+    }
+
+    function checkSeal() {
+      const seal = document.getElementById('finalSeal');
+      if (completedDays.length >= 21) {
+        seal.classList.add('visible');
+      } else {
+        seal.classList.remove('visible');
+      }
+    }
+
+    function checkCompletion() {
+      if (completedDays.length >= 21) {
+        alert("🌸 ¡Felicidades, Marina! Has completado tu Camino del Reikista. Tu primer paso está sellado con luz. Que tu práctica siga floreciendo.");
+      } else {
+        alert(`Te faltan ${21 - completedDays.length} días. ¡Sigue adelante, estás cerca!`);
+      }
+    }
+
+    // Inicializar
+    window.onload = function() {
+      document.querySelectorAll('.day').forEach((el, i) => {
+        if (completedDays.includes(i + 1)) {
+          el.classList.add('completed');
+        }
+      });
+      updateProgress();
+    };
+  </script>
+
+</body>
+</html>
